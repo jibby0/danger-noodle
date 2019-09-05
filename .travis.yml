@@ -64,6 +64,7 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
+        - which gcc-arm-linux-gnueabi
       env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="gcc-arm-linux-gnueabi"
     - stage: arm
       os: linux
@@ -74,6 +75,7 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
+        - which gcc-arm-linux-gnueabi
       env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="gcc-arm-linux-gnueabi" LDFLAGS="-static"
 
     # MIPS architecture build with gcc
