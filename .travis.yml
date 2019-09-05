@@ -48,7 +48,7 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
-      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="CC=gcc-arm-linux-gnueabi"
+      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" MAKECC="CC=gcc-arm-linux-gnueabi"
     - stage: arm
       os: linux
       dist: xenial
@@ -58,7 +58,7 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
-      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="CC=gcc-arm-linux-gnueabi" LDFLAGS="-static"
+      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" MAKECC="CC=gcc-arm-linux-gnueabi" LDFLAGS="-static"
 
     # MIPS architecture build
     - stage: mips
@@ -87,7 +87,7 @@ script:
   - cd ${TRAVIS_BUILD_DIR}
   - cd src
   - ./configure $BUILD $HOST $TARGET
-  - make $CC
+  - make $MAKECC
   - file boa
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then objdump -f boa; fi
   - stat boa
