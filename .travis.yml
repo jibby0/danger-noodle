@@ -36,6 +36,28 @@ jobs:
       dist: bionic
       compiler: clang
 
+    # Static Linux builds with gcc and clang
+    - stage: default
+      os: linux
+      dist: xenial
+      compiler: gcc
+      env: LDFLAGS="-static"
+    - stage: default
+      os: linux
+      dist: xenial
+      compiler: clang
+      env: LDFLAGS="-static"
+    - stage: default
+      os: linux
+      dist: bionic
+      compiler: gcc
+      env: LDFLAGS="-static"
+    - stage: default
+      os: linux
+      dist: bionic
+      compiler: clang
+      env: LDFLAGS="-static"
+
     # MIPS architecture build using Xenial
     - stage: mips
       os: linux
@@ -68,7 +90,7 @@ jobs:
 script: 
   - cd ${TRAVIS_BUILD_DIR}
   - cd src
-  - ./configure
+  - ./configure --build x86_64-pc-linux-gnu LDFLAGS="$LDFLAGS"
   - make
   - file boa
   - objdump -f boa
