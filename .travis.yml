@@ -5,24 +5,53 @@ branches:
   only:
   - master
 
-os:
-  - linux
-  - osx
-
-dist:
-  - precise
-  - trusty
-  - xenial
-  - bionic
-
-compiler:
-  - gcc
-  - clang
-
 # Do not error on failures in OSX, which is not the target system
 matrix:
   allow_failures:
     - os: osx
+
+# Follow DynamoRIO's lead and use a jobs approach over os, compiler, env matrix
+jobs:
+  include:
+    # Default precise build with gcc
+    - os: linux
+      dist: precise
+      compiler: gcc
+    # Default precise build with clang
+    - os: linux
+      dist: precise
+      compiler: clang
+    # Default trusty build with gcc
+    - os: linux
+      dist: xenial
+      compiler: gcc
+    # Default trusty build with clang
+    - os: linux
+      dist: trusty
+      compiler: clang
+    # Default xenial build with gcc
+    - os: linux
+      dist: xenial
+      compiler: gcc
+    # Default xenial build with clang
+    - os: linux
+      dist: xenial
+      compiler: clang
+    # Default bionic build with gcc
+    - os: linux
+      dist: bionic
+      compiler: gcc
+    # Default bionic build with clang
+    - os: linux
+      dist: bionic
+      compiler: clang
+    # OSX build default with gcc
+    - os: osx
+      compiler: gcc
+    # OSX build default with clang
+    - os: osx
+      compiler: clang
+
 
 install:
   - if [ "$APT_INSTALL_BISON_FLEX" = "true" ]; then sudo apt-get install bison flex; fi
