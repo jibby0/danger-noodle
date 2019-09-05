@@ -27,7 +27,7 @@ jobs:
       compiler: clang
     # Default trusty build with gcc
     - os: linux
-      dist: xenial
+      dist: trusty
       compiler: gcc
     # Default trusty build with clang
     - os: linux
