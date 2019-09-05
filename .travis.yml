@@ -1,5 +1,3 @@
-os: [ linux ]
-dist: xenial
 sudo: enabled
 language: c
 
