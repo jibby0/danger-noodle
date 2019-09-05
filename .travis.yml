@@ -14,14 +14,12 @@ jobs:
     # Linux build default with clang
     - os: linux
       compiler: clang
-    # Niche environments I don't want to get emailed about if we fail in
-    - allow_failures:
-      # OSX build default with gcc
-      - os: osx
-        compiler: clang
-      # OSX build default with clang
-      - os: osx
-        compiler: clang
+    # OSX build default with gcc
+    - os: osx
+      compiler: clang
+    # OSX build default with clang
+    - os: osx
+      compiler: clang
 
 
 install:
