@@ -29,36 +29,38 @@ jobs:
       compiler: clang
     - stage: default
       os: linux
-      dist: bionic
+      dist: xenial
       compiler: gcc
+      env: LDFLAGS="-static"
     - stage: default
       os: linux
-      dist: bionic
-      compiler: clang
-
-    # Static Linux builds with gcc and clang
-    - stage: static
-      os: linux
-      dist: xenial
-      compiler: gcc
-      env: LDFLAGS="-static"
-    - stage: static
-      os: linux
       dist: xenial
       compiler: clang
       env: LDFLAGS="-static"
-    - stage: static
+    
+    # ARM architecture build
+    - stage: arm
       os: linux
-      dist: bionic
+      dist: xenial
       compiler: gcc
-      env: LDFLAGS="-static"
-    - stage: static
+      addons:
+        apt:
+          packages:
+            - u-boot-tools
+      install: sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
+      env: BUILD="--build x86_64-pc-linux-gnu" HOST="--host arm-linux-gnueabi"
+    - stage: arm
       os: linux
-      dist: bionic
-      compiler: clang
-      env: LDFLAGS="-static"
+      dist: xenial
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - u-boot-tools
+      install: sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
+      env: BUILD="--build x86_64-pc-linux-gnu" HOST="--host arm-linux-gnueabi" LDFLAGS="-static"
 
-    # MIPS architecture build using Xenial
+    # MIPS architecture build
     - stage: mips
       os: linux
       dist: xenial
@@ -69,7 +71,7 @@ jobs:
             - u-boot-tools
       install: sudo apt-get install gcc-mips-linux-gnu
 
-    # PowerPC architecture build using Xenial
+    # PowerPC architecture build
     - stage: powerpc
       os: linux
       dist: xenial
@@ -90,8 +92,9 @@ jobs:
 script: 
   - cd ${TRAVIS_BUILD_DIR}
   - cd src
-  - ./configure --build x86_64-pc-linux-gnu LDFLAGS="$LDFLAGS"
+  - ./configure $BUILD $HOST LDFLAGS="$LDFLAGS"
   - make
   - file boa
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then objdump -f boa; fi
-  - du -h .
+  - du -h *
+  - stat boa
