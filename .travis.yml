@@ -17,43 +17,48 @@ matrix:
 # Follow DynamoRIO's lead and use a jobs approach over os, compiler, env matrix
 jobs:
   include:
-    # Default precise build with gcc
-    - os: linux
-      dist: precise
-      compiler: gcc
-    # Default precise build with clang
-    - os: linux
-      dist: precise
-      compiler: clang
-    # Default trusty build with gcc
-    - os: linux
-      dist: trusty
-      compiler: gcc
-    # Default trusty build with clang
-    - os: linux
-      dist: trusty
-      compiler: clang
-    # Default xenial build with gcc
-    - os: linux
+    # Default Linux builds with gcc and clang
+    - stage: Build_Default
+      os: linux
       dist: xenial
       compiler: gcc
-    # Default xenial build with clang
-    - os: linux
+    - stage: Build_Default
+      os: linux
       dist: xenial
       compiler: clang
-    # Default bionic build with gcc
-    - os: linux
+    - stage: Build_Default
+      os: linux
       dist: bionic
       compiler: gcc
-    # Default bionic build with clang
-    - os: linux
+    - stage: Build_Default
+      os: linux
       dist: bionic
       compiler: clang
-    # OSX build default with gcc
-    - os: osx
+    # MIPS architecture build using Xenial
+    - stage: MIPS
+      os: linux
+      dist: xenial
       compiler: gcc
-    # OSX build default with clang
-    - os: osx
+      addons:
+        apt:
+          packages:
+            - u-boot-tools
+      script: sudo apt-get install gcc-mips-linux-gnu
+    # PowerPC architecture build using Xenial
+    - stage: PowerPC
+      os: linux
+      dist: xenial
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - gcc-powerpc-linux-gnu
+    # Default OSX builds with gcc and clang
+    - stage: Build_OSX
+      os: osx
+      compiler: gcc
+    - stage: Build_OSX
+      os: osx
       compiler: clang
 
 script: 
