@@ -43,23 +43,21 @@ jobs:
       os: linux
       dist: xenial
       compiler: gcc
-      addons:
-        apt_packages:
-          - lib32bz2-1.0
-          - lib32ncurses5
-          - lib32z1
-      install: sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
+      install:
+        - sudo dpkg --add-architecture i386
+        - sudo apt-get update
+        - sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0 libstdc++6:i386 libfontconfig1:i386 libxext6:i386 libxrender1:i386 libgstreamer-plugins-base0.10-0:i386
+        - sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
       env: TARGET="--target arm-linux-gnueabi"
     - stage: arm
       os: linux
       dist: xenial
       compiler: gcc
-      addons:
-        apt_packages:
-          - lib32bz2-1.0
-          - lib32ncurses5
-          - lib32z1
-      install: sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
+      install:
+        - sudo dpkg --add-architecture i386
+        - sudo apt-get update
+        - sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0 libstdc++6:i386 libfontconfig1:i386 libxext6:i386 libxrender1:i386 libgstreamer-plugins-base0.10-0:i386
+        - sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
       env: TARGET="--target arm-linux-gnueabi" LDFLAGS="-static"
 
     # MIPS architecture build
