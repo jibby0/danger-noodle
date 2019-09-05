@@ -1,4 +1,8 @@
 # danger-noodle
+[![Build Status](https://travis-ci.org/tweedge/danger-noodle.svg?branch=master)](https://travis-ci.org/tweedge/danger-noodle)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/tweedge/danger-noodle.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tweedge/danger-noodle/context:cpp)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/tweedge/danger-noodle.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tweedge/danger-noodle/alerts/)
+
 A fork of the [Boa](http://www.boa.org) version 0.94.13 webserver with light security enhancements.
 
 ### About
