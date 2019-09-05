@@ -37,6 +37,16 @@ jobs:
       dist: xenial
       compiler: clang
       env: LDFLAGS="-static"
+    - stage: default
+      os: linux
+      dist: xenial
+      compiler: gcc
+      env: LDFLAGS="-static" CFLAGS="-m32"
+    - stage: default
+      os: linux
+      dist: xenial
+      compiler: clang
+      env: LDFLAGS="-static" CFLAGS="-m32"
     
     # ARM architecture build
     - stage: arm
