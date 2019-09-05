@@ -71,7 +71,8 @@ jobs:
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
         - which arm-linux-gnueabihf-gcc
-      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm-linux-gnueabi" TARGET="--target=arm-linux-gnueabi" CC="/usr/bin/arm-linux-gnueabihf-gcc"
+        - sudo chmod +x /usr/bin/arm-linux-gnueabihf-gcc
+      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="/usr/bin/arm-linux-gnueabihf-gcc"
     - stage: arm
       os: linux
       dist: xenial
@@ -82,7 +83,8 @@ jobs:
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
         - which arm-linux-gnueabihf-gcc
-      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm-linux-gnueabi" TARGET="--target=arm-linux-gnueabi" CC="/usr/bin/arm-linux-gnueabihf-gcc" LDFLAGS="-static"
+        - sudo chmod +x /usr/bin/arm-linux-gnueabihf-gcc
+      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="/usr/bin/arm-linux-gnueabihf-gcc" LDFLAGS="-static"
 
     # MIPS architecture build with gcc
     - stage: mips
