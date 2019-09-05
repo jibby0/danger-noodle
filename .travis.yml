@@ -52,10 +52,6 @@ jobs:
     - os: osx
       compiler: clang
 
-
-install:
-  - if [ "$APT_INSTALL_BISON_FLEX" = "true" ]; then sudo apt-get install bison flex; fi
-
 script: 
   - cd ${TRAVIS_BUILD_DIR}
   - cd src
