@@ -44,6 +44,9 @@ jobs:
       dist: xenial
       compiler: gcc
       install:
+        - sudo dpkg --add-architecture i386
+        - sudo apt-get update
+        - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-multilib
       env: LDFLAGS="-m32" CFLAGS="-m32"
     - stage: i386
@@ -51,6 +54,9 @@ jobs:
       dist: xenial
       compiler: gcc
       install:
+        - sudo dpkg --add-architecture i386
+        - sudo apt-get update
+        - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-multilib
       env: LDFLAGS="-m32 -static" CFLAGS="-m32"
     
@@ -65,7 +71,7 @@ jobs:
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
         - which arm-linux-gnueabihf-gcc
-      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="arm-linux-gnueabihf-gcc"
+      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="/usr/bin/arm-linux-gnueabihf-gcc"
     - stage: arm
       os: linux
       dist: xenial
@@ -76,7 +82,7 @@ jobs:
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
         - sudo apt-get install gcc-arm-linux-gnueabihf
         - which arm-linux-gnueabihf-gcc
-      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="arm-linux-gnueabihf-gcc" LDFLAGS="-static"
+      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="/usr/bin/arm-linux-gnueabihf-gcc" LDFLAGS="-static"
 
     # MIPS architecture build with gcc
     - stage: mips
