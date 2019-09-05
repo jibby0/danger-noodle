@@ -37,22 +37,22 @@ jobs:
       compiler: clang
 
     # Static Linux builds with gcc and clang
-    - stage: default
+    - stage: static
       os: linux
       dist: xenial
       compiler: gcc
       env: LDFLAGS="-static"
-    - stage: default
+    - stage: static
       os: linux
       dist: xenial
       compiler: clang
       env: LDFLAGS="-static"
-    - stage: default
+    - stage: static
       os: linux
       dist: bionic
       compiler: gcc
       env: LDFLAGS="-static"
-    - stage: default
+    - stage: static
       os: linux
       dist: bionic
       compiler: clang
@@ -93,4 +93,5 @@ script:
   - ./configure --build x86_64-pc-linux-gnu LDFLAGS="$LDFLAGS"
   - make
   - file boa
-  - objdump -f boa
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then objdump -f boa; fi
+  - du -h .
