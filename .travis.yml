@@ -18,26 +18,35 @@ matrix:
 jobs:
   include:
 
-    # Default Linux builds with gcc and clang
-    - stage: default
+    # 64-bit Linux builds with gcc and clang
+    - stage: amd64
       os: linux
       dist: xenial
       compiler: gcc
-    - stage: default
+    - stage: amd64
       os: linux
       dist: xenial
       compiler: clang
-    - stage: default
+    - stage: amd64
       os: linux
       dist: xenial
       compiler: gcc
       env: LDFLAGS="-static"
-    - stage: default
+    - stage: amd64
       os: linux
       dist: xenial
       compiler: clang
       env: LDFLAGS="-static"
-    - stage: default
+    
+    # 32-bit Linux builds with gcc
+    - stage: i386
+      os: linux
+      dist: xenial
+      compiler: gcc
+      install:
+        - sudo apt-get install gcc-multilib
+      env: CFLAGS="-m32"
+    - stage: i386
       os: linux
       dist: xenial
       compiler: gcc
@@ -45,7 +54,7 @@ jobs:
         - sudo apt-get install gcc-multilib
       env: LDFLAGS="-static" CFLAGS="-m32"
     
-    # ARM architecture build
+    # ARM architecture build with gcc
     - stage: arm
       os: linux
       dist: xenial
@@ -67,7 +76,7 @@ jobs:
         - sudo apt-get install gcc-arm-linux-gnueabihf
       env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC_OVERRIDE="CC=gcc-arm-linux-gnueabi" LDFLAGS="-static"
 
-    # MIPS architecture build
+    # MIPS architecture build with gcc
     - stage: mips
       os: linux
       dist: xenial
@@ -78,7 +87,7 @@ jobs:
             - u-boot-tools
       install: sudo apt-get install gcc-mips-linux-gnu
 
-    # PowerPC architecture build
+    # PowerPC architecture build with gcc
     - stage: powerpc
       os: linux
       dist: xenial
