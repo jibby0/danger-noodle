@@ -17,25 +17,27 @@ matrix:
 # Follow DynamoRIO's lead and use a jobs approach over os, compiler, env matrix
 jobs:
   include:
+
     # Default Linux builds with gcc and clang
-    - stage: Build_Default
+    - stage: default
       os: linux
       dist: xenial
       compiler: gcc
-    - stage: Build_Default
+    - stage: default
       os: linux
       dist: xenial
       compiler: clang
-    - stage: Build_Default
+    - stage: default
       os: linux
       dist: bionic
       compiler: gcc
-    - stage: Build_Default
+    - stage: default
       os: linux
       dist: bionic
       compiler: clang
+
     # MIPS architecture build using Xenial
-    - stage: MIPS
+    - stage: mips
       os: linux
       dist: xenial
       compiler: gcc
@@ -43,9 +45,10 @@ jobs:
         apt:
           packages:
             - u-boot-tools
-      script: sudo apt-get install gcc-mips-linux-gnu
+      install: sudo apt-get install gcc-mips-linux-gnu
+
     # PowerPC architecture build using Xenial
-    - stage: PowerPC
+    - stage: powerpc
       os: linux
       dist: xenial
       compiler: gcc
@@ -53,11 +56,12 @@ jobs:
         apt:
           packages:
             - gcc-powerpc-linux-gnu
+
     # Default OSX builds with gcc and clang
-    - stage: Build_OSX
+    - stage: osx
       os: osx
       compiler: gcc
-    - stage: Build_OSX
+    - stage: osx
       os: osx
       compiler: clang
 
@@ -66,3 +70,5 @@ script:
   - cd src
   - ./configure
   - make
+  - file boa
+  - objdump -f boa
