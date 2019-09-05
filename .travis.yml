@@ -43,14 +43,24 @@ jobs:
       os: linux
       dist: xenial
       compiler: gcc
+      addons:
+        apt_packages:
+          - lib32bz2-1.0
+          - lib32ncurses5
+          - lib32z1
       install: sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
-      env: TARGET="--host=arm-linux-gnueabi"
+      env: TARGET="--target arm-linux-gnueabi"
     - stage: arm
       os: linux
       dist: xenial
       compiler: gcc
+      addons:
+        apt_packages:
+          - lib32bz2-1.0
+          - lib32ncurses5
+          - lib32z1
       install: sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
-      env: TARGET="--host=arm-linux-gnueabi" LDFLAGS="-static"
+      env: TARGET="--target arm-linux-gnueabi" LDFLAGS="-static"
 
     # MIPS architecture build
     - stage: mips
@@ -68,15 +78,9 @@ jobs:
       os: linux
       dist: xenial
       compiler: gcc
-      addons:
-        apt:
-          packages:
-            - gcc-powerpc-linux-gnu
+      install: sudo apt-get install gcc-powerpc-linux-gnu
 
-    # Default OSX builds with gcc and clang
-    - stage: osx
-      os: osx
-      compiler: gcc
+    # OSX build with clang
     - stage: osx
       os: osx
       compiler: clang
@@ -89,3 +93,4 @@ script:
   - file boa
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then objdump -f boa; fi
   - stat boa
+  - sha512sum boa
