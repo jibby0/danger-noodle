@@ -1,0 +1,17 @@
+os: [ linux ]
+dist: xenial
+sudo: disabled
+language: c
+
+compiler:
+  - clang
+  - gcc
+
+install:
+  - apt-get install bison flex
+
+script: 
+  - cd ${TRAVIS_BUILD_DIR}
+  - cd src
+  - ./configure
+  - make
