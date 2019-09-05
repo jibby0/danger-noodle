@@ -45,14 +45,14 @@ jobs:
       compiler: gcc
       install:
         - sudo apt-get install gcc-multilib
-      env: CFLAGS="-m32"
+      env: LDFLAGS="-m32" CFLAGS="-m32"
     - stage: i386
       os: linux
       dist: xenial
       compiler: gcc
       install:
         - sudo apt-get install gcc-multilib
-      env: LDFLAGS="-static" CFLAGS="-m32"
+      env: LDFLAGS="-m32 -static" CFLAGS="-m32"
     
     # ARM architecture build with gcc
     - stage: arm
