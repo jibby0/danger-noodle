@@ -47,8 +47,8 @@ jobs:
         - sudo dpkg --add-architecture i386
         - sudo apt-get update
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
-        - sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
-      env: TARGET="--target arm-linux-gnueabi" CFLAGS="CC=gcc-arm-linux-gnueabi -march=armv7"
+        - sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabihf
+      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="CC=gcc-arm-linux-gnueabi"
     - stage: arm
       os: linux
       dist: xenial
@@ -57,8 +57,8 @@ jobs:
         - sudo dpkg --add-architecture i386
         - sudo apt-get update
         - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
-        - sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi
-      env: TARGET="--target arm-linux-gnueabi" CFLAGS="CC=gcc-arm-linux-gnueabi -march=armv7" LDFLAGS="-static"
+        - sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabihf
+      env: TARGET="--target arm-linux-gnueabi" CFLAGS="-march=armv7" CC="CC=gcc-arm-linux-gnueabi" LDFLAGS="-static"
 
     # MIPS architecture build
     - stage: mips
@@ -87,7 +87,7 @@ script:
   - cd ${TRAVIS_BUILD_DIR}
   - cd src
   - ./configure $BUILD $HOST $TARGET
-  - make
+  - make $CC
   - file boa
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then objdump -f boa; fi
   - stat boa
