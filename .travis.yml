@@ -5,25 +5,32 @@ branches:
   only:
   - master
 
+# Do not error on failures in OSX, which is not the target system
+matrix:
+  allow_failures:
+    - os: osx
+
 # Follow DynamoRIO's lead and use a jobs approach over os, compiler, env matrix
 jobs:
   include:
     # Linux build default with gcc
     - os: linux
       compiler: gcc
+      env: APT_INSTALL_BISON_FLEX=true
     # Linux build default with clang
     - os: linux
       compiler: clang
+      env: APT_INSTALL_BISON_FLEX=true
     # OSX build default with gcc
     - os: osx
-      compiler: clang
+      compiler: gcc
     # OSX build default with clang
     - os: osx
       compiler: clang
 
 
 install:
-  - sudo apt-get install bison flex
+  - if [ "$APT_INSTALL_BISON_FLEX" = "true" ]; then sudo apt-get install bison flex; fi
 
 script: 
   - cd ${TRAVIS_BUILD_DIR}
