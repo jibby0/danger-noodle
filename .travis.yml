@@ -3,9 +3,28 @@ dist: xenial
 sudo: enabled
 language: c
 
-compiler:
-  - clang
-  - gcc
+branches:
+  only:
+  - master
+
+# Follow DynamoRIO's lead and use a jobs approach over os, compiler, env matrix
+jobs:
+  include:
+    # Linux build default with gcc
+    - os: linux
+      compiler: gcc
+    # Linux build default with clang
+    - os: linux
+      compiler: clang
+    # Niche environments I don't want to get emailed about if we fail in
+    - allow_failures:
+      # OSX build default with gcc
+      - os: osx
+        compiler: clang
+      # OSX build default with clang
+      - os: osx
+        compiler: clang
+
 
 install:
   - sudo apt-get install bison flex
