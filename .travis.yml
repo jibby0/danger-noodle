@@ -70,6 +70,15 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install build-essential binutils-multiarch libc6-dev:i386 gcc-arm-linux-gnueabihf gcc-7-multilib xutils-dev bison flex gcc-7-multilib-arm-linux-gnueabihf
       env: CFLAGS="-m32 -march=armv7" CC_host="gcc -m32" TARGET="--target=arm"
+    - stage: arm
+      os: linux
+      dist: bionic
+      compiler: gcc
+      install:
+        - sudo dpkg --add-architecture i386
+        - sudo apt-get update
+        - sudo apt-get install build-essential binutils-multiarch libc6-dev:i386 gcc-arm-linux-gnueabihf gcc-7-multilib xutils-dev bison flex gcc-7-multilib-arm-linux-gnueabihf
+      env: CFLAGS="-m32 -march=armv7" CC_host="gcc -m32" TARGET="--target=arm" LDFLAGS="-static"
  
     # MIPS architecture build with gcc
     - stage: mips
