@@ -106,7 +106,7 @@ jobs:
 script: 
   - cd ${TRAVIS_BUILD_DIR}
   - cd src
-  - ./configure $BUILD $HOST $TARGET
+  - ./configure $CONFIGURE_PASSTHRU
   - make
   - file boa
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then objdump -f boa; fi
