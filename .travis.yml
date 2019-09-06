@@ -63,7 +63,7 @@ jobs:
     # ARM architecture build with gcc
     - stage: arm
       os: linux
-      dist: xenial
+      dist: bionic
       compiler: gcc
       install:
         - sudo apt-get update
@@ -71,7 +71,7 @@ jobs:
       env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="gcc-8-multilib"
     - stage: arm
       os: linux
-      dist: xenial
+      dist: bionic
       compiler: gcc
       install:
         - sudo dpkg --add-architecture i386
