@@ -68,7 +68,7 @@ jobs:
       install:
         - sudo apt-get update
         - sudo apt-get install gcc-8-multilib xutils-dev
-      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="gcc-8-multilib"
+      env: CC="gcc-8-multilib" CFLAGS="-march=armv7"
     - stage: arm
       os: linux
       dist: bionic
@@ -76,7 +76,7 @@ jobs:
       install:
         - sudo dpkg --add-architecture i386
         - sudo apt-get install gcc-8-multilib xutils-dev
-      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="gcc-8-multilib" LDFLAGS="-static"
+      env: CC="gcc-8-multilib" CFLAGS="-march=armv7" LDFLAGS="-static"
 
     # MIPS architecture build with gcc
     - stage: mips
