@@ -66,25 +66,17 @@ jobs:
       dist: xenial
       compiler: gcc
       install:
-        - sudo dpkg --add-architecture i386
         - sudo apt-get update
-        - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
-        - sudo apt-get install gcc-arm-linux-gnueabihf
-        - which arm-linux-gnueabihf-gcc
-        - sudo chmod +x /usr/bin/arm-linux-gnueabihf-gcc
-      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="/usr/bin/arm-linux-gnueabihf-gcc"
+        - sudo apt-get install gcc-8-multilib xutils-dev
+      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="gcc-8-multilib"
     - stage: arm
       os: linux
       dist: xenial
       compiler: gcc
       install:
         - sudo dpkg --add-architecture i386
-        - sudo apt-get update
-        - sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
-        - sudo apt-get install gcc-arm-linux-gnueabihf
-        - which arm-linux-gnueabihf-gcc
-        - sudo chmod +x /usr/bin/arm-linux-gnueabihf-gcc
-      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="/usr/bin/arm-linux-gnueabihf-gcc" LDFLAGS="-static"
+        - sudo apt-get install gcc-8-multilib xutils-dev
+      env: BUILD="--build=x86_64-linux-gnu" HOST="--host=arm" TARGET="--target=arm" CC="gcc-8-multilib" LDFLAGS="-static"
 
     # MIPS architecture build with gcc
     - stage: mips
