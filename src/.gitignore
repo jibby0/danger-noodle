@@ -1,0 +1,22 @@
+# Build files
+Makefile
+
+# Artifacts
+*.o
+boa
+boa_indexer
+
+# Lexer files
+lex.yy.c
+lex.yy.o
+y.tab.c
+y.tab.h
+y.tab.o
+
+# Configuration
+config.cache
+config.h
+config.o
+config.status
+config.log
+confdefs.h
