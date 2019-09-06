@@ -69,7 +69,7 @@ jobs:
         - sudo dpkg --add-architecture i386
         - sudo apt-get update
         - sudo apt-get install build-essential binutils-multiarch libc6-dev:i386 gcc-arm-linux-gnueabihf gcc-7-multilib gcc-7-multilib-arm-linux-gnueabihf
-      env: CC="gcc-8-multilib" CFLAGS="-march=armv7" CC_host="gcc -m32" CONFIGURE_PASSTHRU="--dest-cpu=arm --cross-compiling --dest-os=linux --with-arm-float-abi=hard --with-arm-fpu=neon"
+      env: CC="arm-linux-gnueabihf-gcc" CFLAGS="-march=armv7" CC_host="gcc -m32" CONFIGURE_PASSTHRU="--dest-cpu=arm --cross-compiling --dest-os=linux --with-arm-float-abi=hard --with-arm-fpu=neon"
     - stage: arm
       os: linux
       dist: bionic
@@ -78,7 +78,7 @@ jobs:
         - sudo dpkg --add-architecture i386
         - sudo apt-get update
         - sudo apt-get install build-essential binutils-multiarch libc6-dev:i386 gcc-arm-linux-gnueabihf gcc-7-multilib gcc-7-multilib-arm-linux-gnueabihf
-      env: CC="gcc-8-multilib" CFLAGS="-march=armv7" CC_host="gcc -m32" CONFIGURE_PASSTHRU="--dest-cpu=arm --cross-compiling --dest-os=linux --with-arm-float-abi=hard --with-arm-fpu=neon" LDFLAGS="-static" 
+      env: CC="arm-linux-gnueabihf-gcc" CFLAGS="-march=armv7" CC_host="gcc -m32" CONFIGURE_PASSTHRU="--dest-cpu=arm --cross-compiling --dest-os=linux --with-arm-float-abi=hard --with-arm-fpu=neon" LDFLAGS="-static" 
 
     # MIPS architecture build with gcc
     - stage: mips
